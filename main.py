@@ -35,7 +35,6 @@ def check(email: str):
     response = requests.get(URL+"emails/{}/".format(urllib.parse.quote(email)))
     try:
         num_reports = response.json()
-        print(num_reports)
     except requests.JSONDecodeError:
         print("Received Invalid Json!")
         raise typer.Exit(1)
