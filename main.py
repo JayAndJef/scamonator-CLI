@@ -32,9 +32,10 @@ def check(email: str):
     Check a user against scamonator
     """
     email = urllib.parse.quote(email)
-    response = requests.get(URL+"emails/{}".format(urllib.parse.quote(email)))
+    response = requests.get(URL+"emails/{}/".format(urllib.parse.quote(email)))
     try:
         num_reports = response.json()
+        print(num_reports)
     except requests.JSONDecodeError:
         print("Received Invalid Json!")
         raise typer.Exit(1)
@@ -44,7 +45,7 @@ def check(email: str):
     if num_reports == 1:
         print("[yellow]1 user reported this email as a scam![/yellow]")
     elif num_reports == 0:
-        print("[green]0 users reported this email as a scam!![/green]")
+        print("[green]0 users reported this email as a scam![/green]")
     else:
         print("[orange]{} users reported this email as a scam![/orange]".format(num_reports))
     
